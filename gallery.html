@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obra - Antoni Llabres Campins</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Estilos para el modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+    }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 80vh;
+    }
+    .close {
+      position: absolute;
+      top: 30px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: #bbb;
+    }
+    #caption {
+      margin: auto;
+      display: block;
+      text-align: center;
+      color: #ccc;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="about.html">Biografía</a>
+      <a href="gallery.html">Obra</a>
+      <a href="contact.html">Contacto</a>
+    </nav>
+  </header>
+  <main>
+    <section class="gallery">
+      <h1>Obra</h1>
+      <div class="grid">
+        <figure>
+          <img src="img/la-merienda.jpg" alt="La Merienda" />
+          <figcaption>La Merienda</figcaption>
+        </figure>
+        <figure>
+          <img src="img/corredors.jpg" alt="Corredors" />
+          <figcaption>Corredors</figcaption>
+        </figure>
+        <!-- Añade más obras aquí -->
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Antoni Llabres Campins</p>
+  </footer>
+
+  <!-- Modal para imagen ampliada -->
+  <div id="modal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="modal-img" />
+    <div id="caption"></div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modal-img');
+      const captionText = document.getElementById('caption');
+      const closeBtn = document.querySelector('.close');
+
+      // Añadir evento click a todas las imágenes dentro de figure para abrir modal
+      document.querySelectorAll('.gallery img').forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', () => {
+          modal.style.display = 'block';
+          modalImg.src = img.src;
+          captionText.textContent = img.alt || '';
+        });
+      });
+
+      // Cerrar modal al hacer click en la X
+      closeBtn.onclick = function() {
+        modal.style.display = 'none';
+      }
+
+      // Cerrar modal si se hace click fuera de la imagen
+      modal.onclick = function(event) {
+        if(event.target === modal) {
+          modal.style.display = 'none';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
